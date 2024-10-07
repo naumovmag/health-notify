@@ -1,0 +1,26 @@
+{
+    "name": "naumov-adata/health-notify",
+    "description": "HealthNotifier is a library for performing system health checks and sending notifications upon issue detection. Easily configurable to fit your project's needs, it ensures continuous monitoring of your applications and prompts quick responses to failures, enhancing the reliability and stability of your infrastructure.",
+    "type": "library",
+    "require": {
+        "php": "^8.1",
+        "illuminate/console": "^9.0|^10.0",
+	    "adata-team/healthchecker": "^2.0",
+	    "illuminate/container": "^9.0|^10.0",
+	    "illuminate/support": "^9.0|^10.0"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "license": "proprietary",
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "naumov",
+            "email": "naumov_@mail.ru"
+        }
+    ]
+}
