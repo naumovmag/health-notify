@@ -50,11 +50,10 @@ class HealthNotifyDTO
      */
     public static function fromHealthCheck(array $healthCheckData): self
     {
-        $name           = data_get($healthCheckData, 'app');
-        $failedServices = array_filter($healthCheckData['services'], function ($service) {
-            return $service['result'] === 'fail';
-        });
-        $services       = array_keys($failedServices);
+        $name     = data_get($healthCheckData, 'app');
+        $services = array_map(function ($service) {
+            return $service['result'] === 'ok';
+        }, $healthCheckData['services']);
 
         return new self($name, $services);
     }
@@ -69,11 +68,15 @@ class HealthNotifyDTO
         $environment = App::environment();
         $serviceList = implode(
             "\n",
-            array_map(fn($service) => "❗️ {$service} - is down or has a connection issue.", $this->services)
+            array_map(
+                fn($service, $status) => ($status ? "✅" : "❗️") . " {$service} - " . ($status ? "successfully" : "failed"),
+                array_keys($this->services),
+                $this->services
+            )
         );
 
         return sprintf(
-            "Environment: \"%s\".\n Service: \"%s\"\n HealthChecker has detected issues:\n%s",
+            "Environment: \"%s\".\nService: \"%s\"\nHealthChecker has detected the following statuses:\n%s",
             $environment,
             $this->name,
             $serviceList
