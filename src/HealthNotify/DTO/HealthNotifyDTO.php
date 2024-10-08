@@ -73,7 +73,7 @@ class HealthNotifyDTO
         );
 
         return sprintf(
-            "Environment: \"%s\".\n Service: \"%s\"\n, HealthChecker has detected issues:\n%s",
+            "Environment: \"%s\".\n Service: \"%s\"\n HealthChecker has detected issues:\n%s",
             $environment,
             $this->name,
             $serviceList
