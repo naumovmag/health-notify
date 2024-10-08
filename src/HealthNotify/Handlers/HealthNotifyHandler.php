@@ -28,9 +28,7 @@ class HealthNotifyHandler
         $response         = $healthController->index();
         $healthData       = $response->getData(true);
 
-        if (data_get($healthData, 'health') !== 'green') {
-            $this->notifyChannels(HealthNotifyDTO::fromHealthCheck($healthData), $notificationChannels);
-        }
+        $this->notifyChannels(HealthNotifyDTO::fromHealthCheck($healthData), $notificationChannels);
     }
 
     /**
