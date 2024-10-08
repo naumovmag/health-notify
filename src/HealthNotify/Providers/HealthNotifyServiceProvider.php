@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace HealthNotify\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -17,7 +17,7 @@ class HealthNotifyServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../../config/healthnotify.php',
+            __DIR__ . '/../config/healthnotify.php',
             'healthnotify'
         );
     }

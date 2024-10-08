@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Console;
+namespace HealthNotify\Console;
 
 use HealthNotify\Handlers\HealthNotifyHandler;
 use Illuminate\Console\Command;
@@ -41,6 +41,7 @@ class HealthNotifyCommand extends Command
      * Execute the console command.
      *
      * @return void
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function handle(): void
     {
