@@ -6,6 +6,8 @@ namespace HealthNotify\Console;
 
 use HealthNotify\Handlers\HealthNotifyHandler;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\App;
+use Symfony\Component\Console\Command\Command as CommandAlias;
 
 /**
  * Class HealthNotifyCommand
@@ -40,13 +42,21 @@ class HealthNotifyCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return void
+     * @return int
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function handle(): void
+    public function handle(): int
     {
+        if (App::environment() !== 'production') {
+            $this->warn('The command is intended only for working in a productive environment.');
+
+            return CommandAlias::SUCCESS;
+        }
+
         $this->handler->handle();
 
         $this->info('The health check has been done successfully.');
+
+        return CommandAlias::SUCCESS;
     }
 }
