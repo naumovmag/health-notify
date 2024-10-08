@@ -8,6 +8,7 @@ use HealthNotify\Services\Notifier;
 use Illuminate\Container\Container;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class HealthNotifyHandler
@@ -39,16 +40,22 @@ class HealthNotifyHandler
      * @param array                             $channels
      *
      * @return void
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     protected function notifyChannels(HealthNotifyDTO $dto, array $channels): void
     {
         foreach ($channels as $channelConfig) {
             if (data_get($channelConfig, 'enabled', false)) {
-                /** @var Notifier $notifier */
-                $notifier = Container::getInstance()
-                                     ->make(data_get($channelConfig, 'class'));
-                $notifier->send($dto, $channelConfig);
+                try {
+                    /** @var Notifier $notifier */
+                    $notifier = Container::getInstance()
+                                         ->make(data_get($channelConfig, 'class'));
+                    $notifier->send($dto, $channelConfig);
+                } catch (\Exception $e) {
+                    Log::error('Failed to send notification', [
+                        'channel' => data_get($channelConfig, 'class'),
+                        'error'   => $e->getMessage(),
+                    ]);
+                }
             }
         }
     }
