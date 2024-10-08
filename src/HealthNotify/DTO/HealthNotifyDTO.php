@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace HealthNotify\DTO;
 
+use Illuminate\Support\Facades\App;
+
 /**
  * Class HealthNotifyDTO
  */
@@ -64,13 +66,15 @@ class HealthNotifyDTO
      */
     public function toMarkdownMessage(): string
     {
+        $environment = App::environment();
         $serviceList = implode(
             "\n",
             array_map(fn($service) => "❗️ {$service} - is down or has a connection issue.", $this->services)
         );
 
         return sprintf(
-            "For the service \"%s\", HealthChecker has detected issues:\n%s",
+            "Environment: \"%s\".\n Service: \"%s\"\n, HealthChecker has detected issues:\n%s",
+            $environment,
             $this->name,
             $serviceList
         );
