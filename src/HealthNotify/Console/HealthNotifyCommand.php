@@ -47,8 +47,10 @@ class HealthNotifyCommand extends Command
      */
     public function handle(): int
     {
-        if (App::environment() !== 'production') {
-            $this->warn('The command is intended only for working in a productive environment.');
+        $notRun = ['local', 'testing'];
+
+        if (in_array(App::environment(), $notRun)) {
+            $this->warn('This command cannot run in this environment.');
 
             return CommandAlias::SUCCESS;
         }
