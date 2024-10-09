@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace HealthNotify\Handlers;
 
 use Adata\HealthChecker\Http\Controllers\HealthController;
@@ -13,7 +15,7 @@ use Illuminate\Support\Facades\Log;
 /**
  * Class HealthNotifyHandler
  */
-class HealthNotifyHandler
+final class HealthNotifyHandler
 {
     /**
      * @return void

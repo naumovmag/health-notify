@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\App;
 /**
  * Class HealthNotifyDTO
  */
-class HealthNotifyDTO
+final class HealthNotifyDTO
 {
     /**
      * @param string $name
