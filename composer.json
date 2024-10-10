@@ -4,17 +4,14 @@
     "type": "library",
     "require": {
         "php": "^8.1",
-        "illuminate/console": "^9.0|^10.0",
 	    "adata-team/healthchecker": "^2.0",
-	    "illuminate/container": "^9.0|^10.0",
-	    "illuminate/support": "^9.0|^10.0"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "license": "proprietary",
     "autoload": {
         "psr-4": {
-            "": "src/"
+            "NaumovAdata\\HealthNotify\\": "src/"
         }
     },
     "authors": [
