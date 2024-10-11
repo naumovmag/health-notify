@@ -1,0 +1,13 @@
+version: '3.8'
+
+networks:
+  adata-local:
+    external: false
+
+services:
+  app:
+    image: docker.adata.kz:443/adata-stack/docker-images/php:8.2-fpm
+    volumes:
+      - ./:/var/www
+    networks:
+      - adata-local
