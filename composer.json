@@ -14,10 +14,17 @@
             "HealthNotify\\": "src/HealthNotify/"
         }
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "HealthNotify\\Providers\\HealthNotifyServiceProvider"
+            ]
+        }
+    },
     "authors": [
         {
-            "name": "naumov",
-            "email": "naumov_@mail.ru"
+            "name": "Super web application",
+            "homepage": "https://adata.kz/"
         }
     ]
 }
