@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Http;
  */
 final class TelegramNotifier extends Notifier
 {
+    private const SEND_TELEGRAM_API_URL = 'https://api.telegram.org/bot%s/sendMessage';
+
     /**
      * Send a notification message.
      *
@@ -25,7 +27,7 @@ final class TelegramNotifier extends Notifier
     {
         $botToken = data_get($config, 'bot_token');
         $chatId   = data_get($config, 'chat_id');
-        $endpoint = sprintf('https://api.telegram.org/bot%s/sendMessage', $botToken);
+        $endpoint = sprintf(self::SEND_TELEGRAM_API_URL, $botToken);
         $message  = $dto->toMarkdownMessage();
 
         $params = [
